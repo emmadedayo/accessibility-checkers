@@ -36,8 +36,8 @@ Follow these steps to install and run the project:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/emmadedayo/assessment.git
-cd assessment
+git clone git@github.com:emmadedayo/accessibility-checkers.git
+cd accessibility-checkers
 ```
 
 ### 2. Set up Docker containers
