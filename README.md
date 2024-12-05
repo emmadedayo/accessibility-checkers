@@ -56,7 +56,7 @@ Start the containers in detached mode:
 make up
 ```
 
-This will spin up both the backend and frontend services defined in the `docker-compose.yml` file. By default, the Laravel backend will be available on `http://localhost:8000` and the Vue.js frontend on `http://localhost:8090/`.
+This will spin up both the backend and frontend services defined in the `docker-compose.yml` file. By default, the Laravel backend will be available on `http://localhost:8081` and the Vue.js frontend on `http://localhost:8090/`.
 
 ### 4. Run the tests (optional)
 
