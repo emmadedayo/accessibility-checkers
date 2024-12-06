@@ -40,7 +40,31 @@ git clone git@github.com:emmadedayo/accessibility-checkers.git
 cd accessibility-checkers
 ```
 
-### 2. Set up Docker containers
+### 2. Copy environment variables
+
+Navigate to the respective directories for the backend and frontend, and copy the `.env.example` file to `.env`:
+
+- For the **backend**:
+
+  ```bash
+  cd backend
+  cp .env.example .env
+  ```
+
+- For the **frontend**:
+
+  ```bash
+  cd frontend
+  cp .env.example .env
+  ```
+
+Return to the root directory:
+
+```bash
+cd ..
+```
+
+### 3. Set up Docker containers
 
 Run the following command to build the Docker containers for both the backend (Laravel) and frontend (Vue.js):
 
@@ -48,7 +72,7 @@ Run the following command to build the Docker containers for both the backend (L
 make build
 ```
 
-### 3. Start the Docker containers
+### 4. Start the Docker containers
 
 Start the containers in detached mode:
 
@@ -56,9 +80,11 @@ Start the containers in detached mode:
 make up
 ```
 
-This will spin up both the backend and frontend services defined in the `docker-compose.yml` file. By default, the Laravel backend will be available on `http://localhost:8081` and the Vue.js frontend on `http://localhost:8090/`.
+This will spin up both the backend and frontend services defined in the `docker-compose.yml` file. By default:
+- The Laravel backend will be available on `http://localhost:8081`
+- The Vue.js frontend will be available on `http://localhost:8090/`.
 
-### 4. Run the tests (optional)
+### 5. Run the tests (optional)
 
 You can run the tests for the backend and frontend separately using the following commands:
 
@@ -76,12 +102,12 @@ You can run the tests for the backend and frontend separately using the followin
   make test-frontend
   ```
 
-### 5. Access the application
+### 6. Access the application
 
 - Visit the **frontend** at `http://localhost:8090/` in your web browser.
 - The frontend provides an interface for uploading HTML files and displaying the accessibility analysis results.
 
-### 6. Stopping the containers
+### 7. Stopping the containers
 
 To stop the containers, run:
 
@@ -131,6 +157,3 @@ For questions or inquiries, feel free to contact the project maintainer:
 - **Emmanuel Adenagbe**: [emmadenagbe@gmail.com](mailto:emmadenagbe@gmail.com)
 
 ---
-
-This `README.md` provides a clear overview of the project, installation steps, and how to run the application and tests. Adjust any specifics as necessary!# Accessibility Assessment
-# accessbility-assessment
