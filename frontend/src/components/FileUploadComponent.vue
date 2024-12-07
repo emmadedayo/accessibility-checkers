@@ -25,10 +25,9 @@
         <a class="hover:underline" href="#">Checker</a> /
         <span>Forms</span>
       </nav>
-      <div class="flex gap-8">
-        <!-- File Upload Form (Left Panel) -->
+      <div class="flex flex-col md:flex-row gap-8">
         <div
-          class="bg-white p-6 rounded-md shadow-md w-[400px] flex-none h-[400px] overflow-y-auto"
+          class="bg-white p-6 rounded-md shadow-md w-full md:w-[400px] flex-none h-[400px] overflow-y-auto"
         >
           <div
             v-if="errorMessage"
@@ -57,10 +56,12 @@
           </div>
           <h2 class="text-lg font-bold text-gray-700 mb-4">File Upload Form</h2>
           <form @submit.prevent="handleSubmit">
+            <label for="file-input" class="sr-only">Upload an HTML file</label>
             <div
               class="border-2 border-dashed border-blue-500 rounded-lg p-6 text-center relative h-[180px] flex items-center justify-center"
             >
               <input
+                id="file-input"
                 type="file"
                 accept=".html"
                 ref="fileInput"
@@ -70,7 +71,6 @@
                 title="Select an HTML file for accessibility check"
               />
               <div class="flex flex-col items-center">
-                <!-- Show Cloud Icon and Text When No File Is Selected -->
                 <svg
                   v-if="!selectedFile"
                   class="h-12 w-12 text-blue-500 mb-3"
@@ -83,14 +83,12 @@
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    d="M20.42 16.58a7 7 0 00-13.42-3.42A4.992 4.992 0 003 16a5 5 0 005 5h12a5 5 0 000-10z"
+                    d="M 20.42 16.58a7 7 0 00-13.42-3.42A4.992  4.992  0 003 16a5 5 0 005 5h12a5 5 0 000-10z"
                   />
                 </svg>
                 <p v-if="!selectedFile" class="text-gray-600 font-medium">
                   Click here to Select Your File
                 </p>
-
-                <!-- Show File Name and HTML Icon When File Is Selected -->
                 <div v-if="selectedFile" class="flex items-center">
                   <svg
                     class="h-6 w-6 text-blue-500 mr-2"
@@ -112,50 +110,48 @@
                 </div>
               </div>
             </div>
-
-            <div class="flex justify-between mt-4">
+            <div class="flex flex-col md:flex-row justify-between mt-4 gap-4">
               <button
-                class="bg-blue-600 text-white py-2 px-8 rounded-lg w-full mr-2"
+                class="bg-blue-600 text-white py-2 px-8 rounded-lg w-full md:w-auto"
                 type="submit"
                 :disabled="loading"
                 :aria-disabled="loading"
                 :class="{ 'opacity-50 cursor-not-allowed': loading }"
+                aria-label="Upload file"
               >
                 Upload File
               </button>
               <button
-                class="bg-gray-600 text-white py-2 px-8 rounded-lg w-full ml-2"
+                class="bg-gray-600 text-white py-2 px-8 rounded-lg w-full md:w-auto"
                 type="reset"
                 @click="resetForm"
                 :disabled="loading"
                 :class="{ 'opacity-50 cursor-not-allowed': loading }"
+                aria-label="Reset form"
               >
                 Reset
               </button>
             </div>
           </form>
         </div>
-
-        <!-- File Accessibility Result (Right Panel) -->
-        <div class="bg-white p-6 rounded-lg shadow-md flex-grow min-h-[500px]">
+        <div
+          class="bg-white p-6 rounded-lg shadow-md flex-grow min-h-[500px] mt-4 md:mt-0"
+        >
           <h2 class="text-lg font-bold text-gray-700 mb-4">
             File Accessibility Result
           </h2>
-
           <h4
             v-if="!loading && results.length"
             class="text-lg font-bold text-gray-700 mb-4"
           >
             The File Accessibility Result is {{ scores }} %
           </h4>
-
           <div class="relative min-h-[200px] flex items-center justify-center">
             <div
               v-if="loading"
               class="absolute inset-0 flex items-center justify-center"
               role="status"
             >
-              <!-- Loading Spinner -->
               <svg
                 class="animate-spin h-10 w-10 text-blue-600"
                 xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +175,7 @@
             </div>
             <table
               v-if="!loading && results.length"
-              class="w-full border-collapse"
+              class="w-full border-collapse table-auto"
             >
               <thead>
                 <tr class="bg-gray-100">
@@ -204,11 +200,8 @@
                 </tr>
               </tbody>
             </table>
-            <div
-              v-if="!loading && !results.length"
-              class="text-center text-gray-500"
-            >
-              No issues found.
+            <div v-else-if="!loading" class="text-center text-gray-600">
+              No results available.
             </div>
           </div>
         </div>
