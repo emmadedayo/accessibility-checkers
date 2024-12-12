@@ -38,31 +38,52 @@
           ></path>
         </svg>
       </div>
-      <table
-        v-if="!loading && results.length"
-        class="w-full border-collapse table-auto"
-      >
-        <thead>
-          <tr class="bg-gray-100">
-            <th class="border p-2 text-left">#</th>
-            <th class="border p-2 text-left">Type</th>
-            <th class="border p-2 text-left">Element</th>
-            <th class="border p-2 text-left">Message</th>
-            <th class="border p-2 text-left">MetaData Rule</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(issue, index) in results" :key="index" class="border-b">
-            <td class="p-2">{{ index + 1 }}</td>
-            <td class="p-2">{{ issue.type }}</td>
-            <td class="p-2">{{ issue.element }}</td>
-            <td class="p-2">{{ issue.message }}</td>
-            <td class="p-2">{{ issue.rule_metadata }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div v-else-if="!loading" class="text-center text-gray-600">
-        No results available.
+      <div>
+        <div class="overflow-x-auto">
+          <table
+            v-if="!loading && results.length"
+            class="w-full border-collapse table-auto hidden md:table"
+          >
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="border p-2 text-left">#</th>
+                <th class="border p-2 text-left">Type</th>
+                <th class="border p-2 text-left">Element</th>
+                <th class="border p-2 text-left">Message</th>
+                <th class="border p-2 text-left">MetaData Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(issue, index) in results"
+                :key="index"
+                class="border-b"
+              >
+                <td class="p-2">{{ index + 1 }}</td>
+                <td class="p-2">{{ issue.type }}</td>
+                <td class="p-2">{{ issue.element }}</td>
+                <td class="p-2">{{ issue.message }}</td>
+                <td class="p-2">{{ issue.rule }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-if="!loading && results.length" class="md:hidden">
+          <div
+            v-for="(issue, index) in results"
+            :key="index"
+            class="border p-4 mb-4 rounded-lg shadow-md"
+          >
+            <p><strong>#:</strong> {{ index + 1 }}</p>
+            <p><strong>Type:</strong> {{ issue.type }}</p>
+            <p><strong>Element:</strong> {{ issue.element }}</p>
+            <p><strong>Message:</strong> {{ issue.message }}</p>
+            <p><strong>MetaData Rule:</strong> {{ issue.rule_metadata }}</p>
+          </div>
+        </div>
+        <div v-else-if="!loading" class="text-center text-gray-600">
+          No results available.
+        </div>
       </div>
     </div>
   </div>
